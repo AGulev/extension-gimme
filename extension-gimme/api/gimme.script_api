@@ -9,7 +9,7 @@
 
     parameters:
       - name: hash_val
-        type: hash
+        type: hash, string
 
     return:
       - name: output

@@ -13,7 +13,15 @@
 
 static int Gimme_HashVal(lua_State* L)
 {
-    dmhash_t hash = dmScript::CheckHash(L, 1);
+    dmhash_t hash = 0;
+    if (lua_type(L, 1) == LUA_TSTRING)
+    {
+        hash = dmHashString64(luaL_checkstring(L, 1));
+    }
+    else
+    {
+        hash = dmScript::CheckHash(L, 1);
+    }
     char buffer[64];
     dmSnPrintf(buffer, sizeof(buffer), DM_HASH_LONG_FMT, hash);
     lua_pushstring(L, buffer);

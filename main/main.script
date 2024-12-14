@@ -2,6 +2,10 @@ function init(self)
     local hash_value = hash("value")
     local str = gimme.hash_val(hash_value)
     print(hash_value, ":", str)
+
+    str = gimme.hash_val("value")
+    print(hash_value, ":", str)
+
 end
 
 function final(self)
