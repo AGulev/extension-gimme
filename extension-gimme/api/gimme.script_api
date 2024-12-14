@@ -1,0 +1,16 @@
+- name: gimme
+  type: table
+  desc: Functions that convertsDefold types into different values
+
+  members:
+
+  - name: hash_val
+    type: function
+
+    parameters:
+      - name: hash_val
+        type: hash
+
+    return:
+      - name: output
+        type: string
