@@ -14,3 +14,14 @@
     return:
       - name: output
         type: string
+
+  - name: unhash_val
+    type: function
+
+    parameters:
+      - name: unhash_val
+        type: hash, string
+
+    return:
+      - name: output
+        type: string

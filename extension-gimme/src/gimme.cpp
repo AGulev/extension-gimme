@@ -11,6 +11,9 @@
 #define DM_HASH_LONG_FMT "%llu"
 #endif
 
+#include <stdint.h>
+#include <stdlib.h>
+
 static int Gimme_HashVal(lua_State* L)
 {
     dmhash_t hash = 0;
@@ -28,11 +31,31 @@ static int Gimme_HashVal(lua_State* L)
     return 1;
 }
 
+static int Gimme_UnHashVal(lua_State* L)
+{
+    dmhash_t hash = 0;
+    if (lua_type(L, 1) == LUA_TSTRING)
+    {
+        hash = (dmhash_t)strtoull(luaL_checkstring(L, 1), NULL, 10);
+    }
+    else
+    {
+        hash = dmScript::CheckHash(L, 1);
+    }
+    uint32_t len;
+    const char* reverse = (const char*) dmHashReverse64(hash, &len);
+    char buffer[len+1];
+    dmSnPrintf(buffer, sizeof(buffer), "%s", reverse);
+    lua_pushstring(L, buffer);
+    return 1;
+}
+
 #undef DM_HASH_LONG_FMT
 
 static const luaL_reg Module_methods[] =
 {
     {"hash_val", Gimme_HashVal},
+    {"unhash_val", Gimme_UnHashVal},
     {0, 0}
 };
 

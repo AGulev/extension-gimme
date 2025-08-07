@@ -6,6 +6,9 @@ function init(self)
     str = gimme.hash_val("value")
     print(hash_value, ":", str)
 
+    local unhahs = gimme.unhash_val(str)
+    print(hash_value, ":'"..unhahs.."'")
+
 end
 
 function final(self)
