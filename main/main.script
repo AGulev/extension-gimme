@@ -1,3 +1,5 @@
+local pls_gimme = require("extension-gimme.pls_gimme")
+
 function init(self)
     local hash_value = hash("value")
     local str = gimme.hash_val(hash_value)
@@ -6,9 +8,14 @@ function init(self)
     str = gimme.hash_val("value")
     print(hash_value, ":", str)
 
+    print(go.get_id(), gimme.hash_val(go.get_id()), gimme.unhash_val(go.get_id()))
+
     local unhahs = gimme.unhash_val(str)
     print(hash_value, ":'"..unhahs.."'")
 
+    local err_str = [["DEFOLD:ERROR:GAMEOBJECT: Instance '<unknown:2403139543084994936>' could not be found when dispatching message '<unknown:1470838101223322218>' sent from game:<unknown:2403139543084994936>#<unknown:3368041780547566206>\n"]]
+    local unhashed_err = pls_gimme.error_message(err_str)
+    print(err_str, "\n->\n", unhashed_err)
 end
 
 function final(self)

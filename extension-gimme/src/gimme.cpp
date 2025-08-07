@@ -42,9 +42,8 @@ static int Gimme_UnHashVal(lua_State* L)
     {
         hash = dmScript::CheckHash(L, 1);
     }
-    uint32_t len;
-    const char* reverse = (const char*) dmHashReverse64(hash, &len);
-    char buffer[len+1];
+    const char* reverse = (const char*) dmHashReverseSafe64(hash);
+    char buffer[512];
     dmSnPrintf(buffer, sizeof(buffer), "%s", reverse);
     lua_pushstring(L, buffer);
     return 1;
